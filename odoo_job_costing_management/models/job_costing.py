@@ -259,11 +259,13 @@ class JobCosting(models.Model):
         'job_cost_id',
     )
     assumed_qty = fields.Float(string="Assumed Qty")
+    quantity = fields.Float(string="Quantity")
     overhead_profit = fields.Float(string="Overhead Profit (%)")
     srb_tax = fields.Many2one('account.tax', string="SRB Tax")
     or_cost = fields.Float(string="OR cost Per Unit", compute='_compute_or_cost')
+    total_amount = fields.Float(string="Total Amount", compute='_compute_or_cost')
     
-    @api.onchange('assumed_qty', 'overhead_profit', 'srb_tax', 'jobcost_total')
+    @api.onchange('assumed_qty', 'overhead_profit', 'srb_tax', 'jobcost_total','quantity')
     def _compute_or_cost(self):
         for rec in self:
             # material_cost = sum(rec.job_cost_line_ids.mapped('total_cost'))
@@ -279,6 +281,7 @@ class JobCosting(models.Model):
                 rec.or_cost = cost_per_unit
             else:
                 rec.or_cost = 0
+            rec.total_amount = rec.or_cost * rec.quantity
 
     #@api.multi
     def action_draft(self):
