@@ -57,9 +57,11 @@
 <!--                          odoo11  <field name="issue_id" attrs="{'readonly' : [('state','in',('approve','done','cancel'))]}"/>-->
                             <field name="partner_id" attrs="{'readonly' : [('state','in',('approve','done','cancel'))]}"/>
                             <field name="assumed_qty" />
+                            <field name="quantity" />
                             <field name="overhead_profit" />
                             <field name="srb_tax" />
                             <field name="or_cost" />
+                            <field name="total_amount" />
 
                         </group>
                         <group>
