@@ -51,6 +51,7 @@
                     <group>
                         <group>
                             <field name="name" attrs="{'readonly' : [('state','in',('approve','done','cancel'))]}"/>
+                            <field name="product_id" domain="[('is_bom_item','=', True)]" attrs="{'readonly' : [('state','in',('approve','done','cancel'))]}"/>
                             <field name="project_id" attrs="{'readonly' : [('state','in',('approve','done','cancel'))]}"/>
                             <field name="analytic_id" attrs="{'readonly' : [('state','in',('approve','done','cancel'))]}"/>
                             <field name="task_id" attrs="{'readonly' : [('state','in',('approve','done','cancel'))]}"/>
@@ -164,6 +165,7 @@
             <tree>
                 <field name="number"/>
                 <field name="name"/>
+                <field name="product_id" domain="[('is_bom_item','=', True)]"/>
                 <field name="project_id"/>
                 <field name="start_date"/>
                 <field name="complete_date"/>

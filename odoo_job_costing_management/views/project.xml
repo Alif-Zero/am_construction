@@ -12,6 +12,9 @@
                     <field string="Job Costs" name="job_cost_count" widget="statinfo"/>
                     </button>
                 </xpath>
+                <field name="partner_id" position="after">
+                    <field name="product_id" domain="[('is_bom_item','=', True)]"/>
+                </field>
             </field>
         </record>
 
@@ -25,6 +28,9 @@
                     <field string="Job Costs" name="job_cost_count" widget="statinfo"/>
                     </button>
                 </xpath>
+                <field name="partner_id" position="after">
+                    <field name="product_id" domain="[('is_bom_item','=', True)]"/>
+                </field>
             </field>
         </record>
 
@@ -37,6 +43,16 @@
                     <field name="job_cost_id" options="{'no_create': True, 'no_open': True}" domain="[('state','=','approve'),('project_id','=',project_id)]"/>
                     <field name="job_cost_line_id" domain="[('direct_id','=',job_cost_id)]"/>
                 </xpath>
+            </field>
+        </record>  
+        <record id="view_task_tree2" model="ir.ui.view">
+            <field name="name">project.task.inherited.tree</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="product_id" domain="[('is_bom_item','=', True)]"/>
+                </field>
             </field>
         </record>
 

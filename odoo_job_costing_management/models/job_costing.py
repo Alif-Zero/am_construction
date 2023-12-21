@@ -203,6 +203,7 @@ class JobCosting(models.Model):
         required=True,
 #        domain=[('customer','=', True)],
     )
+    product_id = fields.Many2one('product.product', string="BOQ Item")
     state = fields.Selection(
         selection=[
                     ('draft','Draft'),

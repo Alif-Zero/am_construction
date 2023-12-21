@@ -13,3 +13,5 @@ class Product(models.Model):
         ('subcontract', 'Subcontract')], 
         string='BOQ Type', 
     )
+    is_bom_item = fields.Boolean(string="BOQ Item")
+    

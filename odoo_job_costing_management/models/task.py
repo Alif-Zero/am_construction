@@ -137,6 +137,7 @@ class ProjectTask(models.Model):
         string = "Job Number",
         copy = False,
     )
+    product_id = fields.Many2one('product.product', string="BOQ Item")
 
     @api.model
     def create(self,vals):

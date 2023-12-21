@@ -22,7 +22,7 @@ class Project(models.Model):
         'job.costing',
         'project_id',
     )
-
+    product_id = fields.Many2one('product.product', string="BOQ Item")
     #@api.multi
     def project_to_jobcost_action(self):
         self.ensure_one()
