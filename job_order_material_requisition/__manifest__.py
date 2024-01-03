@@ -40,6 +40,8 @@ job Material Planning
             'security/ir.model.access.csv',
             'wizard/material_requisition.xml',
             'views/project_task.xml',
+            'views/purchase_requisition.xml',
+            'views/account.xml',
     ],
     'installable' : True,
     'application' : False,

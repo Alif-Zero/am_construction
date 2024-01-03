@@ -43,11 +43,11 @@ class MaterialRequisition(models.TransientModel):
         if self.operation_type == 'create':
             user_ids = False
             if job_order.user_ids:
-                user_ids = job_order.user_ids[0]
+                user_ids = job_order.user_ids[0].id
             vals = {
                 'request_date': fields.Datetime.now(),
                 # 'task_user_id': job_order.user_id.id,
-                'task_user_id': user_ids.id,
+                'task_user_id': user_ids,
                 'task_id':job_order.id,
                 'employee_id': self.employee_id.id,
                 'project_id':job_order.project_id.id,
@@ -55,29 +55,37 @@ class MaterialRequisition(models.TransientModel):
             }
             reserv_move_id = custome_reservtion_obj.create(vals)
             material_requisition = reserv_move_id
-            for line in job_order.material_plan_ids:
+            for line in job_order.material_plan_ids.filtered(lambda x: x.partner_id):
                 if not line.requisition_line:
                     line_vals =  {
-                        'product_id': line.product_id.id,
-                        'description':line.description,
-                        'qty': line.product_uom_qty,
-                        'uom': line.product_uom.id,
+                        'product_id':   line.product_id.id,
+                        'description':  line.description,
+                        'qty':          line.product_uom_qty,
+                        'uom':          line.product_uom.id,
                         'requisition_type':line.requisition_type,
                         'requisition_id':reserv_move_id.id,
+                        'partner_id':   line.partner_id.ids,
+                        'job_cost_id':  line.job_cost_id.id,
+                        'cost_line_id': line.cost_line_id.id,
+                        'plan_id':      line.id
                     }
                     purchase_requisition_line = requisition_lines.create(line_vals)
                     line.requisition_line = purchase_requisition_line
             
         if self.operation_type == 'exist':
-            for line in job_order.material_plan_ids:
+            for line in job_order.material_plan_ids.filtered(lambda x: x.partner_id):
                 if not line.requisition_line:
                     line_vals =  {
-                        'product_id': line.product_id.id,
-                        'description':line.description,
-                        'qty': line.product_uom_qty,
-                        'uom': line.product_uom.id,
+                        'product_id':   line.product_id.id,
+                        'description':  line.description,
+                        'qty':          line.product_uom_qty,
+                        'uom':          line.product_uom.id,
                         'requisition_type':line.requisition_type,
                         'requisition_id':self.material_requisition.id,
+                        'partner_id':   line.partner_id.ids,
+                        'job_cost_id':  line.job_cost_id.id,
+                        'cost_line_id': line.cost_line_id.id,
+                        'plan_id':      line.id
                     }
                     purchase_requisition_line = requisition_lines.create(line_vals)
                     line.requisition_line = purchase_requisition_line

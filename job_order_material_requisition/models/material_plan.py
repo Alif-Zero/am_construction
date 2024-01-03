@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Part of Probuse Consulting Service Pvt Ltd. See LICENSE file for full copyright and licensing details.
-
 from odoo import models, fields, api
 
 class MaterialPlanning(models.Model):
@@ -22,3 +20,8 @@ class MaterialPlanning(models.Model):
         default='internal',
         required=False,
     )
+    partner_id = fields.Many2many('res.partner', string="Vendor")
+    job_cost_id = fields.Many2one('job.costing', string="Job Cost")
+    cost_line_id = fields.Many2one('job.cost.line')
+
+

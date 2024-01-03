@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="material_purchase_requisition_form_view">
+        <field name="name">material.purchase.requisition.form</field>
+        <field name="model">material.purchase.requisition</field>
+        <field name="inherit_id" ref="material_purchase_requisitions.material_purchase_requisition_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='requisition_line_ids']//field[@name='partner_id']" position="after">
+                <field name="job_cost_id" />
+                <field name="cost_line_id"/>
+                <field name="plan_id"/>
+                <field name="task_id"/>
+             </xpath>
+        </field>
+     </record>
+    </data>
+</odoo>
+
+        
