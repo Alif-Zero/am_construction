@@ -80,11 +80,10 @@ class JobCostingWizard(models.TransientModel):
             
             for row in range(8, sheet.nrows):
                 # if sheet.cell(row, 0).value == 'MATERIAL':
-                    date = sheet.cell(row, 0).value
+                    data = sheet.cell(row, 0).value
                     # date = datetime.strptime(str(date), '%d/%m/%Y').strftime(DEFAULT_SERVER_DATE_FORMAT)
-                    if not date:
-                        raise ValidationError(_("Date not found for %s" %(sheet.cell(row, 0).value)))
-                    
+                    if not data:
+                        raise ValidationError(_("Data not found for sheet - row %s %s" %(sheet.name ,row + 1 )))
                     col_job_type = sheet.cell(row, 0).value
                     product_col = sheet.cell(row, 2).value
                     product_qty = sheet.cell(row, 4).value
