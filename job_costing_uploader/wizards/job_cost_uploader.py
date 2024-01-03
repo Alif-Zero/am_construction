@@ -58,10 +58,9 @@ class JobCostingWizard(models.TransientModel):
             # description = sheet.cell(1, 3).value
             
             
-                
             job_costsheet_id = job_costsheet_obj.create({
                 'name': name,
-                #  'description': description,
+                'description': name,
                 'notes_job': notes_job,
                 'task_id': self.task_id.id,
                 'project_id': self.task_id.project_id.id,
