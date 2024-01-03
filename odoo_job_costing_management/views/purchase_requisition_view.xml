@@ -19,7 +19,7 @@
 <!--                    <field string="Purchases" name="purchase_order_count" widget="statinfo"/>-->
 <!--                </button>-->
 <!--            </xpath>-->
-            <xpath expr="//form/sheet/notebook" position="inside">
+            <!-- <xpath expr="//form/sheet/notebook" position="inside">
                 <page string="Materials / BOQ Cost" name="job_cost_stock_material_boq">
                     <group>
                         <field name="equipment_machine_total"/>
@@ -28,7 +28,7 @@
                         <field name="subcontract_total"/>
                     </group>
                 </page>
-            </xpath>
+            </xpath> -->
         </field>
     </record>
     
