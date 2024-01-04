@@ -84,10 +84,10 @@ class JobCostingWizard(models.TransientModel):
                     # date = datetime.strptime(str(date), '%d/%m/%Y').strftime(DEFAULT_SERVER_DATE_FORMAT)
                     if not data:
                         raise ValidationError(_("Data not found for sheet - row %s %s" %(sheet.name ,row + 1 )))
-                    col_job_type = sheet.cell(row, 0).value
-                    product_col = sheet.cell(row, 2).value
+                    col_job_type = sheet.cell(row, 0).value.strip()
+                    product_col = sheet.cell(row, 2).value.strip()
                     product_qty = sheet.cell(row, 4).value
-                    unit = sheet.cell(row, 5).value
+                    unit = sheet.cell(row, 5).value.strip()
                     rate = sheet.cell(row, 6).value
                     reference = sheet.cell(row, 8).value
                     
@@ -101,10 +101,12 @@ class JobCostingWizard(models.TransientModel):
                         job_type = 'labour'
                     elif col_job_type == 'EQUIPMENT':
                             job_type = 'overhead'
-                    
+                    else:
+                        raise ValidationError(_("Sheet: %s Row: %s Type is not defined" %(sheet.name ,row+1))) 
+
                     uom_id = self.env['uom.uom'].search([('name', '=', unit)],limit=1)
                     if not uom_id:
-                        raise ValidationError(_("Sheet: %s Row: %s  ,Unit is not define %s" %(sheet.name ,sheet.cell(row + 1 , 0).value , unit))) 
+                        raise ValidationError(_("Sheet: %s Row: %s Unit is not defined %s" %(sheet.name ,row  , unit))) 
                     if not product_id:
                         product_id = self._create_product(product_col, job_type, uom_id, rate)
 
