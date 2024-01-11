@@ -259,6 +259,9 @@
                 <field name="product_qty" type="measure"/>
                 <field name="hours" type="measure"/>
                 <field name="total_cost" type="measure"/>
+                <field name="actual_quantity" type="measure"/>
+                <field name="actual_invoice_quantity" type="measure"/>
+                <field name="actual_hour" type="measure"/>
                 <!-- <field name="day_close" type="measure"/>
                 <field name="color" invisible="1"/>
                 <field name="automated_probability" invisible="1"/>

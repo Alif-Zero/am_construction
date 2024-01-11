@@ -118,7 +118,7 @@ class JobCostLine(models.Model):
         string='Basis'
     )
     hours = fields.Float(
-        string='Hours'
+        string='Planned Hours'
     )
     purchase_order_line_ids = fields.One2many(
         'purchase.order.line',
@@ -135,14 +135,17 @@ class JobCostLine(models.Model):
     )
     actual_quantity = fields.Float(
         string='Actual Purchased Quantity',
+        store=True,
         compute='_compute_actual_quantity',
     )
     actual_invoice_quantity = fields.Float(
         string='Actual Vendor Bill Quantity',
+        store=True,
         compute='_compute_actual_invoice_quantity',
     )
     actual_hour = fields.Float(
         string='Actual Timesheet Hours',
+        store=True,
         compute='_compute_actual_hour',
     )
     project_id = fields.Many2one(related="direct_id.project_id", store=True)
