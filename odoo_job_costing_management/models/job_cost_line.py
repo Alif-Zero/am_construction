@@ -145,3 +145,5 @@ class JobCostLine(models.Model):
         string='Actual Timesheet Hours',
         compute='_compute_actual_hour',
     )
+    project_id = fields.Many2one(related="direct_id.project_id", store=True)
+    task_id = fields.Many2one(related="direct_id.task_id", store=True)
