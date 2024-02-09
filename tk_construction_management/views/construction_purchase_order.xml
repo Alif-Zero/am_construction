@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="construction_purchase_order_form_inherit" model="ir.ui.view">
+            <field name="name">construction.purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="construction_id" readonly="1" force_save="1"
+                           attrs="{'invisible':[('construction_id','=',False)]}"/>
+                    <field name="equipment_id" attrs="{'invisible':[('equipment_id','=',False)]}"/>
+                    <field name="material_id" attrs="{'invisible':[('material_id','=',False)]}"/>
+                    <field name="order_type" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="construction_bill_form_inherit" model="ir.ui.view">
+            <field name="name">construction.bill.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="construction_id" readonly="1" force_save="1"
+                           attrs="{'invisible':[('construction_id','=',False)]}"/>
+                </xpath>
+                <xpath expr="//label[@for='journal_id']" position="before">
+                    <field name="order_type" readonly="1" attrs="{'invisible':[('order_type','=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
