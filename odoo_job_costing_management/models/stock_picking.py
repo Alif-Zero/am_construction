@@ -1,10 +1,13 @@
-# # -*- coding: utf-8 -*-
-# 
-# from odoo import models, fields, api
-# 
-# class StockPicking(models.Model):
-#     _inherit = 'stock.picking'
-#     
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+class StockPicking(models.Model):
+    _inherit = 'stock.picking'
+    
+    cost_planning_id = fields.Many2one('job.costing.planning', string="Planning")
+    cost_id = fields.Many2one('job.costing')
+
 #     @api.multi
 #     @api.onchange('task_id',
 #                   'project_id',

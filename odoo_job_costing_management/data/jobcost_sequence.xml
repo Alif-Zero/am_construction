@@ -8,6 +8,12 @@
             <field name="prefix">COST-SHEET/</field>
             <field name="padding">5</field>
         </record>
+        <record id="jobcosting_planning_seq" model="ir.sequence">
+            <field name="name">Job Costing Planning Sequence</field>
+            <field name="code">job.costing.planning</field>
+            <field name="prefix">JCP/</field>
+            <field name="padding">5</field>
+        </record>
         
         <record id="joborder_seq" model = "ir.sequence">
             <field name="name">Joborder Sequence</field>
